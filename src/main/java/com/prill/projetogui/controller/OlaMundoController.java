@@ -18,8 +18,15 @@ public class OlaMundoController {
 	public String olaMundo() {
 		return "Olá mundo";
 	}
+
+
 	@PostMapping(path = "/pessoa")
-	public ResponseEntity<Pessoa> enviar(@RequestBody Pessoa pessoa){
-		return new ResponseEntity<Pessoa>(pessoa, HttpStatus.CREATED); 
+	public ResponseEntity<Object> enviar(@RequestBody Pessoa pessoa){
+		if (pessoa.getIdade() >= 18){
+			return new ResponseEntity<>("Usuario maior de idade!", HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>("Usuario menor de idade!", HttpStatus.OK);
+		}
 	}
 }
